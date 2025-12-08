@@ -1,0 +1,26 @@
+{
+  "name": "ja-auth-sdk",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A reusable Firebase Authentication SDK with pre-built UI and headless mode",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "firebase",
+    "authentication",
+    "auth",
+    "sdk",
+    "react",
+    "oauth",
+    "google",
+    "apple"
+  ],
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  }
+}
