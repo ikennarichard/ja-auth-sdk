@@ -23,6 +23,10 @@
     "react-native"
   ],
   "exports": {
+    ".": {
+      "import": "./dist/index.js"
+
+    },
     "./ui": {
       "import": "./dist/ui/AuthUI.js"
     }
