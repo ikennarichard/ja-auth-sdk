@@ -17,3 +17,4 @@ export type {
   AuthUser,
   SignInResult,
 } from "./types";
+export { AuthScreen } from "./ui/AuthUi";
