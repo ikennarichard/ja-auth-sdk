@@ -1,45 +1,46 @@
 {
   "name": "ja-auth-sdk",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A reusable Firebase Authentication SDK with pre-built UI and headless mode",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "prepare": "npm run build",
     "test": "jest",
-    "lint": "eslint src --ext .ts,.tsx",
-    "prepare": "npm run build"
+    "lint": "eslint src --ext .ts,.tsx"
   },
   "keywords": [
     "firebase",
     "authentication",
     "auth",
     "sdk",
-    "react",
-    "oauth",
-    "google",
-    "apple"
+    "react-native"
   ],
   "devDependencies": {
     "@types/node": "^24.10.2",
     "@types/react": ">=18",
-    "@types/react-dom": ">=18",
     "@types/react-native": "^0.72.8",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite-plugin-dts": "^4.0.0"
   },
   "peerDependencies": {
-    "@react-native-firebase/app": "*",
-    "@react-native-firebase/auth": "*",
-    "firebase": "^12.6.0",
-    "react": "*",
-    "react-dom": "*",
-    "react-native": "*"
+    "react": ">=18.0.0",
+    "react-native": ">=0.68.0",
+    "@react-native-firebase/app": "^23.0.0",
+    "@react-native-firebase/auth": "^23.0.0",
+    "@react-native-google-signin/google-signin": "^10.0.0",
+    "@invertase/react-native-apple-authentication": "^2.0.0"
   },
-  "author": "Ikenna Richard",
-  "license": "MIT",
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.5.0",
-    "@react-native-google-signin/google-signin": "^16.0.0",
-    "firebase": "^12.6.0"
-  }
+    "@react-native-google-signin/google-signin": "^16.0.0"
+  },
+  "author": "Ikenna Richard",
+  "license": "MIT"
 }
