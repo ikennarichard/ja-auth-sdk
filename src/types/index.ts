@@ -1,42 +1,8 @@
-export enum AuthState {
-  AUTHENTICATED = 'authenticated',
-  UNAUTHENTICATED = 'unauthenticated',
-  TOKEN_EXPIRED = 'token_expired',
-  LOADING = 'loading'
-}
-
-export enum AuthProvider {
-  EMAIL_PASSWORD = 'emailPassword',
-  GOOGLE = 'google',
-  APPLE = 'apple'
-}
-
-
-export interface AuthConfig {
-  // Firebase configuration
-  firebase: {
-    apiKey: string;
-    authDomain: string;
-    projectId: string;
-    storageBucket: string;
-    messagingSenderId: string;
-    appId: string;
-  };
-  
-  // Enable/disable specific providers
-  providers: {
-    [AuthProvider.EMAIL_PASSWORD]?: boolean;
-    [AuthProvider.GOOGLE]?: boolean;
-    [AuthProvider.APPLE]?: boolean;
-  };
-  
-  // Optional UI configuration
-  ui?: {
-    theme?: 'light' | 'dark';
-    brandName?: string;
-    logo?: string;
-  };
-}
+export type AuthState =
+  | "Authenticated"
+  | "Unauthenticated"
+  | "TokenExpired"
+  | "Loading";
 
 export interface AuthUser {
   uid: string;
@@ -44,52 +10,51 @@ export interface AuthUser {
   displayName: string | null;
   photoURL: string | null;
   emailVerified: boolean;
-  provider: string;
+  providerId: string;
+  createdAt: string;
 }
 
-export interface AuthResult {
+export interface AuthConfig {
+  firebase: {
+    apiKey: string;
+    authDomain: string;
+    projectId: string;
+    storageBucket?: string;
+    messagingSenderId?: string;
+    appId?: string;
+  };
+  providers: {
+    emailPassword?: {
+      enabled: boolean;
+      requireEmailVerification?: boolean;
+    };
+    google?: {
+      enabled: boolean;
+      webClientId: string;
+    };
+    apple?: {
+      enabled: boolean;
+    };
+  };
+  ui?: {
+    theme?: "light" | "dark" | "auto";
+    logo?: any;
+    primaryColor?: string;
+  };
+  callbacks?: {
+    onAuthStateChanged?: (state: AuthState, user: AuthUser | null) => void;
+    onError?: (error: AuthError) => void;
+  };
+}
+
+export interface SignInResult {
   success: boolean;
   user?: AuthUser;
   error?: AuthError;
 }
 
-export enum AuthErrorType {
-  INVALID_CREDENTIALS = 'invalid_credentials',
-  USER_NOT_FOUND = 'user_not_found',
-  EMAIL_ALREADY_IN_USE = 'email_already_in_use',
-  WEAK_PASSWORD = 'weak_password',
-  TOKEN_EXPIRED = 'token_expired',
-  NETWORK_ERROR = 'network_error',
-  UNKNOWN_ERROR = 'unknown_error',
-  POPUP_CLOSED = 'popup_closed',
-  PROVIDER_ERROR = 'provider_error'
-}
-
-/**
- * Structured error object
- */
 export interface AuthError {
-  type: AuthErrorType;
+  code: string;
   message: string;
   originalError?: any;
-}
-
-/**
- * Callback type for auth state changes
- */
-export type AuthStateChangeCallback = (state: AuthState, user: AuthUser | null) => void;
-
-/**
- * Sign in credentials for email/password
- */
-export interface EmailPasswordCredentials {
-  email: string;
-  password: string;
-}
-
-/**
- * Sign up data for email/password
- */
-export interface SignUpData extends EmailPasswordCredentials {
-  displayName?: string;
 }
