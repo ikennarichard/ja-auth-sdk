@@ -1,30 +1,27 @@
+import type { FirebaseApp } from "firebase/app";
 import {
   Auth,
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  signOut as firebaseSignOut,
-  onAuthStateChanged,
   GoogleAuthProvider,
   OAuthProvider,
   User,
-  updateProfile
-} from 'firebase/auth';
-import { FirebaseApp } from 'firebase/app';
+  createUserWithEmailAndPassword,
+  signOut as firebaseSignOut,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
 
 import {
   AuthState,
-  AuthUser,
-  AuthResult,
-  AuthStateChangeCallback,
-  EmailPasswordCredentials,
-  SignUpData,
-  AuthProvider
-} from '../types';
-import { ErrorHandler } from './ErrorHandler';
-import { AuthException } from '../types/errors';
-
+  type AuthResult,
+  type AuthStateChangeCallback,
+  type AuthUser,
+  type EmailPasswordCredentials,
+  type SignUpData,
+} from "../types";
+import { ErrorHandler } from "./ErrorHandler";
 
 export class AuthManager {
   private auth: Auth;
@@ -54,9 +51,12 @@ export class AuthManager {
         }
       },
       (error: any) => {
-        console.error('Auth state change error:', error);
+        console.error("Auth state change error:", error);
         // Check if token expired
-        if (error.code === 'auth/id-token-expired' || error.code === 'auth/user-token-expired') {
+        if (
+          error.code === "auth/id-token-expired" ||
+          error.code === "auth/user-token-expired"
+        ) {
           this.updateAuthState(AuthState.TOKEN_EXPIRED);
         }
       }
@@ -90,7 +90,7 @@ export class AuthManager {
       displayName: firebaseUser.displayName,
       photoURL: firebaseUser.photoURL,
       emailVerified: firebaseUser.emailVerified,
-      provider: firebaseUser.providerData[0]?.providerId || 'unknown'
+      provider: firebaseUser.providerData[0]?.providerId || "unknown",
     };
   }
 
@@ -101,7 +101,7 @@ export class AuthManager {
     this.stateChangeCallbacks.add(callback);
     // Immediately call with current state
     callback(this.currentAuthState, this.currentUser);
-    
+
     // Return unsubscribe function
     return () => {
       this.stateChangeCallbacks.delete(callback);
@@ -125,25 +125,27 @@ export class AuthManager {
   /**
    * Sign in with email and password
    */
-  async signInWithEmailPassword(credentials: EmailPasswordCredentials): Promise<AuthResult> {
+  async signInWithEmailPassword(
+    credentials: EmailPasswordCredentials
+  ): Promise<AuthResult> {
     try {
       const userCredential = await signInWithEmailAndPassword(
         this.auth,
         credentials.email,
         credentials.password
       );
-      
+
       const user = this.mapFirebaseUser(userCredential.user);
-      
+
       return {
         success: true,
-        user
+        user,
       };
     } catch (error) {
       const authException = ErrorHandler.handleFirebaseError(error);
       return {
         success: false,
-        error: ErrorHandler.toErrorObject(authException)
+        error: ErrorHandler.toErrorObject(authException),
       };
     }
   }
@@ -162,21 +164,21 @@ export class AuthManager {
       // Update profile with display name if provided
       if (data.displayName) {
         await updateProfile(userCredential.user, {
-          displayName: data.displayName
+          displayName: data.displayName,
         });
       }
-      
+
       const user = this.mapFirebaseUser(userCredential.user);
-      
+
       return {
         success: true,
-        user
+        user,
       };
     } catch (error) {
       const authException = ErrorHandler.handleFirebaseError(error);
       return {
         success: false,
-        error: ErrorHandler.toErrorObject(authException)
+        error: ErrorHandler.toErrorObject(authException),
       };
     }
   }
@@ -188,18 +190,18 @@ export class AuthManager {
     try {
       const provider = new GoogleAuthProvider();
       const userCredential = await signInWithPopup(this.auth, provider);
-      
+
       const user = this.mapFirebaseUser(userCredential.user);
-      
+
       return {
         success: true,
-        user
+        user,
       };
     } catch (error) {
       const authException = ErrorHandler.handleFirebaseError(error);
       return {
         success: false,
-        error: ErrorHandler.toErrorObject(authException)
+        error: ErrorHandler.toErrorObject(authException),
       };
     }
   }
@@ -209,20 +211,20 @@ export class AuthManager {
    */
   async signInWithApple(): Promise<AuthResult> {
     try {
-      const provider = new OAuthProvider('apple.com');
+      const provider = new OAuthProvider("apple.com");
       const userCredential = await signInWithPopup(this.auth, provider);
-      
+
       const user = this.mapFirebaseUser(userCredential.user);
-      
+
       return {
         success: true,
-        user
+        user,
       };
     } catch (error) {
       const authException = ErrorHandler.handleFirebaseError(error);
       return {
         success: false,
-        error: ErrorHandler.toErrorObject(authException)
+        error: ErrorHandler.toErrorObject(authException),
       };
     }
   }

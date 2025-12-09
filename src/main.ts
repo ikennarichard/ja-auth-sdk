@@ -1,22 +1,40 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
+// src/index.ts
 
+// Core exports
+export { AuthManager } from './modules/AuthManager';
+export { ErrorHandler } from './modules/ErrorHandler';
+export { FirebaseConfig } from './config/firebase';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`;
+// Type exports
+export type {
+  AuthState,
+  AuthProvider,
+  AuthConfig,
+  AuthUser,
+  AuthResult,
+  AuthError,
+  AuthErrorType,
+  AuthStateChangeCallback,
+  EmailPasswordCredentials,
+  SignUpData
+} from './types';
+
+// Error class exports
+export {
+  AuthException,
+  InvalidCredentialsException,
+  UserNotFoundException,
+  EmailAlreadyInUseException,
+  WeakPasswordException,
+  TokenExpiredException,
+  NetworkException,
+  PopupClosedException,
+  ProviderException,
+  UnknownAuthException
+} from './types/errors';
+
+// UI components (will be added in next commits)
+// export { AuthWidget } from './components/AuthWidget';
+
+// Hooks (will be added in next commits)
+// export { useAuth } from './hooks/useAuth';

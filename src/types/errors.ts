@@ -12,8 +12,8 @@ export class AuthException extends Error {
     this.originalError = originalError;
     
     // Maintains proper stack trace for where our error was thrown
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
+    if ((Error as any).captureStackTrace) {
+     ( Error as any).captureStackTrace(this, this.constructor);
     }
   }
 }

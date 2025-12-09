@@ -1,9 +1,9 @@
 {
   "name": "ja-auth-sdk",
-  "private": true,
   "version": "1.0.0",
   "description": "A reusable Firebase Authentication SDK with pre-built UI and headless mode",
   "type": "module",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -20,10 +20,32 @@
     "apple"
   ],
   "devDependencies": {
+    "@types/react": ">=18",
+    "@types/react-dom": ">=18",
+    "@types/react-native": "^0.72.8",
     "typescript": "~5.9.3",
     "vite": "^7.2.4"
   },
+  "peerDependencies": {
+    "@react-native-firebase/app": "*",
+    "@react-native-firebase/auth": "*",
+    "@invertase/react-native-apple-authentication": "*",
+    "@react-native-google-signin/google-signin": "*",
+    "firebase": "^12.6.0",
+    "react": "*",
+    "react-dom": "*",
+    "react-native": "*"
+  },
+  "author": "Ikenna Richard",
+  "license": "MIT",
   "dependencies": {
     "firebase": "^12.6.0"
-  }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist/",
+    "src/"
+  ]
 }
