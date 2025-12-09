@@ -37,7 +37,7 @@ export interface AuthConfig {
     };
   };
   ui?: {
-    theme?: "light" | "dark" | "auto";
+    theme?: "light" | "dark" | "auto" | string;
     logo?: any;
     primaryColor?: string;
   };

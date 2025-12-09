@@ -304,36 +304,6 @@ interface AuthConfig {
 
 ---
 
-## 📁 Project Structure
-
-```
-firebase-auth-sdk/
-├── src/
-│   ├── index.ts              # Main export (framework-agnostic)
-│   ├── sdk/
-│   │   └── FirebaseAuthSDK.ts   # Vanilla SDK wrapper
-│   ├── core/                 # Core logic (pure TypeScript)
-│   │   ├── AuthManager.ts
-│   │   └── ErrorHandler.ts
-│   ├── types/               # Type definitions
-│   │   ├── index.ts
-│   │   └── errors.ts
-│   ├── config/
-│   │   └── firebase.ts
-│   └── adapters/            # Framework-specific wrappers
-│       └── react/
-│           ├── AuthContext.tsx
-│           ├── AuthWidget.tsx
-│           └── index.ts
-└── example/
-    ├── vanilla/
-    │   └── index.html
-    └── react/
-        └── App.tsx
-```
-
----
-
 ## 🔧 Development
 
 ```bash
