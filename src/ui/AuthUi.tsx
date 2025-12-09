@@ -19,7 +19,7 @@ type AuthMode = "signin" | "signup" | "reset";
 export const AuthScreen: React.FC<{
   onAuthSuccess?: (user: any) => void;
 }> = ({ onAuthSuccess }) => {
-  const { signIn, signUp, resetPassword, config, error, authState } = useAuth();
+  const { signIn, signUp, resetPassword, config, error } = useAuth();
 
   const [mode, setMode] = useState<AuthMode>("signin");
   const [email, setEmail] = useState("");

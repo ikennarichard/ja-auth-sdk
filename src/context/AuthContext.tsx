@@ -5,8 +5,8 @@ import { EmailPasswordProvider } from '../providers/EmailPasswordProvider';
 import { GoogleProvider } from '../providers/GoogleProvider';
 import { AppleProvider } from '../providers/AppleProvider';
 import { TokenManager } from '../sdk/TokenManager';
-import { ErrorMapper } from '../errors/ErrorMapper';
-import { BaseAuthError } from '../errors/AuthError';
+import { ErrorMapper } from '../errors/errorMapper';
+import { BaseAuthError } from '../errors';
 
 interface AuthContextValue {
   authState: AuthState;
