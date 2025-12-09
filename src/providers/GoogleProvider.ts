@@ -16,22 +16,21 @@ export class GoogleProvider {
 
     try {
       GoogleSignin.configure({
-        webClientId: this.webClientId, // USE WEB CLIENT ID!
+        webClientId: this.webClientId,
         offlineAccess: false,
         forceCodeForRefreshToken: true,
         scopes: ["profile", "email"],
       });
       this.isInitialized = true;
-      console.log("✅ Google Sign-In configured successfully");
+      console.log("Google Sign-In configured successfully");
     } catch (error) {
-      console.error("❌ Google Sign-In configuration error:", error);
+      console.error("Google Sign-In configuration error:", error);
       throw error;
     }
   }
 
   async signIn(): Promise<AuthUser> {
     try {
-      // Initialize before each sign-in attempt
       await this.initialize();
 
       // Check Play Services (Android only)
@@ -39,37 +38,22 @@ export class GoogleProvider {
         showPlayServicesUpdateDialog: true,
       });
 
-      console.log("🔐 Starting Google Sign-In...");
-
-      // Sign in to get user info
       const userInfo = await GoogleSignin.signIn();
-      console.log("✅ Google Sign-In successful");
-
-      // Get the ID token
       const idToken = userInfo.data?.idToken;
 
       if (!idToken) {
-        console.error("❌ No ID token returned");
+        console.error("No ID token returned");
         throw new Error("No ID token returned from Google Sign-In");
       }
-
-      console.log("🔑 Creating Firebase credential...");
-
-      // Create Firebase credential
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-      // Sign in to Firebase
-      console.log("🔥 Signing in to Firebase...");
+      console.log("Signing in to Firebase...");
       const result = await auth().signInWithCredential(googleCredential);
-
-      console.log("✅ Firebase sign-in successful");
 
       return this.mapToAuthUser(result.user);
     } catch (error: any) {
-      console.error("❌ Google Sign-In error:", error);
+      console.error("Google Sign-In error:", error);
 
       if (error.code === "12501") {
-        // User cancelled
         throw new Error("Sign-in cancelled by user");
       }
 

@@ -1,15 +1,10 @@
 import { appleAuth } from "@invertase/react-native-apple-authentication";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import { Platform } from "react-native";
 import { ErrorMapper } from "../errors/errorMapper";
 import { AuthUser } from "../types";
 
 export class AppleProvider {
   async signIn(): Promise<AuthUser> {
-    if (Platform.OS !== "ios") {
-      throw new Error("Apple Sign-In is only available on iOS");
-    }
-
     try {
       const appleAuthRequestResponse = await appleAuth.performRequest({
         requestedOperation: appleAuth.Operation.LOGIN,
