@@ -1,4 +1,4 @@
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import auth, { FirebaseAuthTypes, onIdTokenChanged } from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { ErrorMapper } from "../errors/errorMapper";
 import { AuthUser } from "../types";
@@ -25,7 +25,11 @@ export class GoogleProvider {
 
       const response = await GoogleSignin.signIn();
 
-      const idToken = response.data?.idToken
+      console.log("RESPONSE", response);
+
+      const idToken = response.data?.idToken;
+
+      console.log("RESPONSE", onIdTokenChanged);
 
       const googleCredential = auth.GoogleAuthProvider.credential(`${idToken}`);
 
