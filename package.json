@@ -1,6 +1,6 @@
 {
   "name": "ja-auth-sdk",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A reusable Firebase Authentication SDK with pre-built UI and headless mode",
   "type": "module",
   "main": "dist/index.js",
@@ -25,7 +25,6 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
-
     },
     "./ui": {
       "import": "./dist/ui/AuthUI.js"
