@@ -16,7 +16,10 @@ export class GoogleProvider {
 
     try {
       GoogleSignin.configure({
-        webClientId: this.webClientId,
+        webClientId: this.webClientId, // USE WEB CLIENT ID!
+        offlineAccess: false,
+        forceCodeForRefreshToken: true,
+        scopes: ["profile", "email"],
       });
       this.isInitialized = true;
       console.log("✅ Google Sign-In configured successfully");
