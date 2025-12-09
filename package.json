@@ -27,7 +27,7 @@
       "import": "./dist/index.js"
     },
     "./ui": {
-      "import": "./dist/ui/AuthUI.js"
+      "import": "./dist/ui/AuthUi.js"
     }
   },
   "devDependencies": {
