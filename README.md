@@ -5,7 +5,7 @@ A Firebase Authentication SDK for React Native with **pre-built UI** and **headl
 [![npm version](https://badge.fury.io/js/ja-auth-sdk.svg)](https://www.npmjs.com/package/ja-auth-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✨ Features
+## Features
 
 - 🎨 **Pre-built UI** - Beautiful, customizable authentication screens
 - 🔧 **Headless Mode** - Complete control with hooks-based API
@@ -92,7 +92,7 @@ Configure Google Sign-In following the [@react-native-google-signin/google-signi
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Option 1: Pre-built UI (Recommended for Quick Setup)
 
@@ -191,8 +191,6 @@ const App = () => (
   </AuthProvider>
 );
 ```
-
----
 
 ## API Reference
 
@@ -476,7 +474,7 @@ const authConfig = {
 };
 ```
 
-## 🔧 Advanced Usage
+## Advanced Usage
 
 ### Custom Auth Backend
 
@@ -492,7 +490,7 @@ const response = await fetch("https://your-api.com/protected", {
 });
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -539,16 +537,10 @@ npm install
 npm run build
 ```
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Firebase team for the amazing authentication service
 - React Native Firebase for the native SDK wrapper
 - All contributors to this project
-
-## 📮 Support
-
-- **Issues:** [GitHub Issues](https://github.com/your-username/react-native-firebase-auth-sdk/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/your-username/react-native-firebase-auth-sdk/discussions)
-- **Email:** <richyr306@gmail.com>
 
 Made with ❤️ for the React Native community
