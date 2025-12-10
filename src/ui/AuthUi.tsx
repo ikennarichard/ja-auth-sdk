@@ -65,7 +65,9 @@ export const AuthScreen: React.FC<{
   };
 
   const handleGoogleSignIn = async () => {
-    if (!config.providers.google?.enabled) return;
+    if (!config.providers.google?.enabled) {
+      return;
+    }
 
     setLoading(true);
     try {
@@ -83,7 +85,9 @@ export const AuthScreen: React.FC<{
   };
 
   const handleAppleSignIn = async () => {
-    if (!config.providers.apple?.enabled) return;
+    if (!config.providers.apple?.enabled) {
+      return;
+    }
 
     setLoading(true);
     try {

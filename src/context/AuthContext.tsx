@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import auth from '@react-native-firebase/auth';
 import { AuthConfig, AuthState, AuthUser, SignInResult } from '../types';
 import { EmailPasswordProvider } from '../providers/EmailPasswordProvider';
@@ -17,7 +23,11 @@ interface AuthContextValue {
     google: () => Promise<SignInResult>;
     apple: () => Promise<SignInResult>;
   };
-  signUp: (email: string, password: string, displayName?: string) => Promise<SignInResult>;
+  signUp: (
+    email: string,
+    password: string,
+    displayName?: string,
+  ) => Promise<SignInResult>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   refreshToken: () => Promise<string | null>;
@@ -27,28 +37,28 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ 
-  children: React.ReactNode; 
+export const AuthProvider: React.FC<{
+  children: React.ReactNode;
   config: AuthConfig;
 }> = ({ children, config }) => {
   const [authState, setAuthState] = useState<AuthState>('Loading');
   const [user, setUser] = useState<AuthUser | null>(null);
   const [error, setError] = useState<BaseAuthError | null>(null);
 
-  const [emailProvider] = useState(() => 
-    config.providers.emailPassword?.enabled 
-      ? new EmailPasswordProvider(config.providers.emailPassword) 
-      : null
+  const [emailProvider] = useState(() =>
+    config.providers.emailPassword?.enabled
+      ? new EmailPasswordProvider(config.providers.emailPassword)
+      : null,
   );
 
   const [googleProvider] = useState(() =>
     config.providers.google?.enabled && config.providers.google.webClientId
       ? new GoogleProvider({ webClientId: config.providers.google.webClientId })
-      : null
+      : null,
   );
 
   const [appleProvider] = useState(() =>
-    config.providers.apple?.enabled ? new AppleProvider() : null
+    config.providers.apple?.enabled ? new AppleProvider() : null,
   );
 
   const tokenManager = TokenManager.getInstance();
@@ -63,7 +73,8 @@ export const AuthProvider: React.FC<{
           photoURL: firebaseUser.photoURL,
           emailVerified: firebaseUser.emailVerified,
           providerId: firebaseUser.providerData[0]?.providerId || 'unknown',
-          createdAt: firebaseUser.metadata.creationTime || new Date().toISOString(),
+          createdAt:
+            firebaseUser.metadata.creationTime || new Date().toISOString(),
         };
 
         setUser(mappedUser);
@@ -93,28 +104,27 @@ export const AuthProvider: React.FC<{
         const user = await authFunction();
         return { success: true, user };
       } catch (err) {
-        const authError = err instanceof BaseAuthError 
-          ? err 
-          : ErrorMapper.mapFirebaseError(err);
-        
+        const authError =
+          err instanceof BaseAuthError
+            ? err
+            : ErrorMapper.mapFirebaseError(err);
+
         setError(authError);
         config.callbacks?.onError?.(authError);
-        
+
         return { success: false, error: authError };
       }
     },
-    [config]
+    [config],
   );
 
   const signIn = {
     emailPassword: (email: string, password: string) =>
       handleAuthResult(() => emailProvider!.signIn(email, password)),
-    
-    google: () =>
-      handleAuthResult(() => googleProvider!.signIn()),
-    
-    apple: () =>
-      handleAuthResult(() => appleProvider!.signIn()),
+
+    google: () => handleAuthResult(() => googleProvider!.signIn()),
+
+    apple: () => handleAuthResult(() => appleProvider!.signIn()),
   };
 
   const signUp = (email: string, password: string, displayName?: string) =>
@@ -123,7 +133,9 @@ export const AuthProvider: React.FC<{
   const signOut = async () => {
     try {
       await auth().signOut();
-      if (googleProvider) await googleProvider.signOut();
+      if (googleProvider) {
+        await googleProvider.signOut();
+      }
     } catch (err) {
       const authError = ErrorMapper.mapFirebaseError(err);
       setError(authError);

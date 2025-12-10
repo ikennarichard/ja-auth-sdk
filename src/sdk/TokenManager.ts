@@ -17,7 +17,9 @@ export class TokenManager {
   async getIdToken(forceRefresh = false): Promise<string | null> {
     try {
       const user = auth().currentUser;
-      if (!user) return null;
+      if (!user) {
+        return null;
+      }
 
       const token = await user.getIdToken(forceRefresh);
       return token;
@@ -53,7 +55,9 @@ export class TokenManager {
   async getTokenClaims(): Promise<Record<string, any> | null> {
     try {
       const user = auth().currentUser;
-      if (!user) return null;
+      if (!user) {
+        return null;
+      }
 
       const result = await user.getIdTokenResult();
       return result.claims;

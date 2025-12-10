@@ -29,7 +29,7 @@ export class ErrorMapper {
       case "auth/weak-password":
         return new WeakPasswordException(
           "Password should be at least 6 characters",
-          error
+          error,
         );
 
       case "auth/invalid-email":
@@ -39,7 +39,7 @@ export class ErrorMapper {
       case "auth/timeout":
         return new NetworkException(
           "Network connection failed. Please check your internet",
-          error
+          error,
         );
 
       case "auth/id-token-expired":
@@ -50,28 +50,28 @@ export class ErrorMapper {
         return new BaseAuthError(
           "Too many requests. Please try again later",
           "TOO_MANY_REQUESTS",
-          error
+          error,
         );
 
       case "auth/user-disabled":
         return new BaseAuthError(
           "This account has been disabled",
           "USER_DISABLED",
-          error
+          error,
         );
 
       case "auth/operation-not-allowed":
         return new BaseAuthError(
           "This operation is not allowed",
           "OPERATION_NOT_ALLOWED",
-          error
+          error,
         );
 
       default:
         return new BaseAuthError(
           errorMessage || "An authentication error occurred",
           "UNKNOWN_ERROR",
-          error
+          error,
         );
     }
   }

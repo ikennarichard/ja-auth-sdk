@@ -18,7 +18,7 @@ export class AppleProvider {
       const { identityToken, nonce } = appleAuthRequestResponse;
       const appleCredential = auth.AppleAuthProvider.credential(
         identityToken,
-        nonce
+        nonce,
       );
 
       const result = await auth().signInWithCredential(appleCredential);
