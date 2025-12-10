@@ -85,12 +85,9 @@ apply plugin: 'com.google.gms.google-services'
 
 Configure Google Sign-In following the [@react-native-google-signin/google-signin documentation](https://github.com/react-native-google-signin/google-signin).
 
-#### Apple Sign-In (iOS only)
+#### Apple Sign-In
 
-1. Enable Apple Sign-In in Xcode: `Signing & Capabilities` > `+ Capability` > `Sign In with Apple`
-2. Follow [@invertase/react-native-apple-authentication setup](https://github.com/invertase/react-native-apple-authentication).
-
----
+1. . Follow [@invertase/react-native-apple-authentication setup](https://github.com/invertase/react-native-apple-authentication).
 
 ## Quick Start
 
