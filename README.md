@@ -99,10 +99,10 @@ Configure Google Sign-In following the [@react-native-google-signin/google-signi
 ```tsx
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { AuthProvider } from "ja-auth-sdk";
+import { AuthProvider, AuthConfig } from "ja-auth-sdk";
 import { AuthScreen } from "ja-auth-sdk/ui";
 
-const authConfig = {
+const authConfig: AuthConfig = {
   firebase: {
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -374,7 +374,7 @@ The SDK automatically handles token storage
 ### 2. Email Verification
 
 ```typescript
-const authConfig = {
+const authConfig: AuthConfig = {
   providers: {
     emailPassword: {
       enabled: true,
@@ -456,7 +456,7 @@ const ForgotPasswordScreen = () => {
 ### State Monitoring
 
 ```typescript
-const authConfig = {
+const authConfig: AuthConfig = {
   // ...
   callbacks: {
     onAuthStateChanged: (state, user) => {
@@ -539,6 +539,6 @@ npm run build
 
 ## Acknowledgments
 
-- Firebase team for the amazing authentication service
-- React Native Firebase for the native SDK wrapper
+- Firebase
+- React Native Firebase
 - All contributors to this project
