@@ -41,7 +41,7 @@ export class GoogleProvider {
       });
 
       const userInfo = await GoogleSignin.signIn();
-      const idToken = userInfo.data?.idToken;
+      const idToken = (userInfo as any)?.data?.idToken;
 
       if (!idToken) {
         console.error("No ID token returned");
