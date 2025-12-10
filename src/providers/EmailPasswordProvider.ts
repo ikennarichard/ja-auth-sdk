@@ -28,12 +28,12 @@ export class EmailPasswordProvider {
   async signUp(
     email: string,
     password: string,
-    displayName?: string
+    displayName?: string,
   ): Promise<AuthUser> {
     try {
       const result = await auth().createUserWithEmailAndPassword(
         email,
-        password
+        password,
       );
 
       if (displayName) {
@@ -61,7 +61,9 @@ export class EmailPasswordProvider {
   async sendEmailVerification(): Promise<void> {
     try {
       const user = auth().currentUser;
-      if (!user) throw new Error("No user signed in");
+      if (!user) {
+        throw new Error("No user signed in");
+      }
       await user.sendEmailVerification();
     } catch (error) {
       throw ErrorMapper.mapFirebaseError(error);

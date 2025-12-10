@@ -12,7 +12,9 @@ export class GoogleProvider {
   }
 
   private async initialize() {
-    if (this.isInitialized) return;
+    if (this.isInitialized) {
+      return;
+    }
 
     try {
       GoogleSignin.configure({
@@ -63,7 +65,7 @@ export class GoogleProvider {
 
       if (error.code === "DEVELOPER_ERROR") {
         throw new Error(
-          "DEVELOPER_ERROR: Check SHA-1 fingerprint, package name, and webClientId configuration"
+          "DEVELOPER_ERROR: Check SHA-1 fingerprint, package name, and webClientId configuration",
         );
       }
 

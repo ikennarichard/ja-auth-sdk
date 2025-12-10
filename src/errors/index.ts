@@ -26,7 +26,10 @@ export class UserNotFoundException extends BaseAuthError {
 }
 
 export class EmailAlreadyInUseException extends BaseAuthError {
-  constructor(message = 'Email address is already in use', originalError?: any) {
+  constructor(
+    message = 'Email address is already in use',
+    originalError?: any,
+  ) {
     super(message, 'EMAIL_ALREADY_IN_USE', originalError);
     Object.setPrototypeOf(this, EmailAlreadyInUseException.prototype);
   }
@@ -40,7 +43,10 @@ export class WeakPasswordException extends BaseAuthError {
 }
 
 export class TokenExpiredException extends BaseAuthError {
-  constructor(message = 'Authentication token has expired', originalError?: any) {
+  constructor(
+    message = 'Authentication token has expired',
+    originalError?: any,
+  ) {
     super(message, 'TOKEN_EXPIRED', originalError);
     Object.setPrototypeOf(this, TokenExpiredException.prototype);
   }
