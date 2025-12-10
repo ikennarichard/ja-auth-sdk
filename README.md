@@ -194,7 +194,7 @@ const App = () => (
 
 ---
 
-## 📖 API Reference
+## API Reference
 
 ### `<AuthProvider>`
 
@@ -290,7 +290,7 @@ interface AuthUser {
 }
 ```
 
-## 🚨 Error Handling
+## Error Handling
 
 The SDK provides custom error types for better error handling:
 
@@ -346,7 +346,7 @@ const authConfig = {
 
 ---
 
-## 🎨 UI Customization
+## UI Customization
 
 ### Theme
 
@@ -367,7 +367,7 @@ For complete UI control, use the headless mode and build your own components.
 
 ---
 
-## 🔒 Security Best Practices
+## Security Best Practices
 
 ### 1. Secure Token Storage
 
@@ -408,7 +408,7 @@ if (authState === "TokenExpired") {
 }
 ```
 
-## 📝 Example Flows
+## Example Flows
 
 ### Complete Sign-Up Flow
 
@@ -519,14 +519,14 @@ if (!newToken) {
 }
 ```
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [Firebase Authentication Docs](https://firebase.google.com/docs/auth)
 - [React Native Firebase](https://rnfirebase.io/)
 - [API Documentation](./docs/API.md)
 - [Error Codes Reference](./docs/ERRORS.md)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
