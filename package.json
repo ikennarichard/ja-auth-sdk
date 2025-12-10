@@ -30,27 +30,32 @@
       "import": "./dist/ui/AuthUi.js"
     }
   },
+
   "devDependencies": {
     "@types/node": "^24.10.2",
     "@types/react": ">=18",
     "@types/react-native": "^0.72.8",
     "typescript": "~5.9.3",
-    "vite": "^5.0.0",
-    "@vitejs/plugin-react": "^4.0.0",
-    "vite-plugin-dts": "^4.0.0"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-native": ">=0.68.0",
     "@react-native-firebase/app": "^23.0.0",
     "@react-native-firebase/auth": "^23.0.0",
     "@react-native-google-signin/google-signin": "^10.0.0",
     "@invertase/react-native-apple-authentication": "^2.0.0"
   },
-  "dependencies": {
-    "@invertase/react-native-apple-authentication": "^2.5.0",
-    "@react-native-google-signin/google-signin": "^16.0.0"
+
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.68.0",
+
+    "@react-native-firebase/app": "^23.0.0",
+    "@react-native-firebase/auth": "^23.0.0",
+    "@react-native-google-signin/google-signin": "^10.0.0",
+    "@invertase/react-native-apple-authentication": "^2.0.0"
   },
+
+  "dependencies": {
+    "firebase": "^11.0.0"
+  },
+
   "author": "Ikenna Richard",
   "license": "MIT"
 }

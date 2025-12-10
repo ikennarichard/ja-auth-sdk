@@ -25,7 +25,7 @@ export class GoogleProvider {
 
       const response = await GoogleSignin.signIn();
 
-      const idToken = response.data?.idToken
+      const idToken = (response as any).data?.idToken || (response as any).idToken;
 
       const googleCredential = auth.GoogleAuthProvider.credential(`${idToken}`);
 
