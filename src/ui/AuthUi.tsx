@@ -204,7 +204,7 @@ export const AuthScreen: React.FC<{
                 </TouchableOpacity>
               )}
 
-              {config.providers.apple?.enabled && Platform.OS === "ios" && (
+              {config.providers.apple?.enabled && (
                 <TouchableOpacity
                   style={[styles.socialButton, styles.appleButton]}
                   onPress={handleAppleSignIn}
