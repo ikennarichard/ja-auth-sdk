@@ -1,0 +1,105 @@
+// AppDelegate.m - Configuration for Firebase and Social Sign-In
+
+#import "AppDelegate.h"
+#import <Firebase/Firebase.h>
+#import <GoogleSignIn/GoogleSignIn.h>
+#import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
+#import <React/RCTLinkingManager.h>
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  // Initialize Firebase
+  [FIRApp configure];
+  
+  // Configure Google Sign-In
+  // The client ID is loaded from Info.plist, so no additional configuration needed here
+  
+  // Standard React Native setup
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"YourAppName" initialProperties:nil];
+  
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
+
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  UIViewController *rootViewController = [UIViewController new];
+  rootViewController.view = rootView;
+  self.window.rootViewController = rootViewController;
+  [self.window makeKeyAndVisible];
+  
+  return YES;
+}
+
+/**
+ * Handle URL callbacks for Google Sign-In
+ * This method is called when the Google Sign-In callback URL is opened
+ */
+- (BOOL)application:(UIApplication *)app 
+              openURL:(NSURL *)url 
+              options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  // Handle Google Sign-In callbacks
+  if ([GIDSignIn.sharedInstance handleURL:url]) {
+    return YES;
+  }
+  
+  // Handle linking if using React Navigation or other deep linking
+  return [RCTLinkingManager application:app openURL:url options:options];
+}
+
+/**
+ * Optional: Handle Universal Links for Google Sign-In
+ */
+- (BOOL)application:(UIApplication *)application
+  continueUserActivity:(NSUserActivity *)userActivity
+    restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *))restorationHandler
+{
+  return [RCTLinkingManager application:application
+                   continueUserActivity:userActivity
+                     restorationHandler:restorationHandler];
+}
+
+// MARK: - RCTBridgeDelegate Methods
+
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+#if DEBUG
+  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
+#else
+  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+#endif
+}
+
+@end
+
+/**
+ * IMPORTANT NOTES FOR iOS CONFIGURATION:
+ * 
+ * 1. GoogleService-Info.plist
+ *    - Must be added to your Xcode project
+ *    - Should be in the project root
+ *    - Ensure it's added to your app target
+ * 
+ * 2. Google Sign-In
+ *    - Client ID is automatically loaded from Info.plist
+ *    - You must add URL schemes in Info.plist:
+ *      CFBundleURLTypes → Item 0 → CFBundleURLSchemes:
+ *        - com.googleusercontent.apps.YOUR_CLIENT_ID
+ *    - Also add GIDClientID key with your Client ID
+ * 
+ * 3. Apple Sign-In
+ *    - Add "Sign in with Apple" capability in Xcode:
+ *      Target → Signing & Capabilities → + Capability → Sign in with Apple
+ *    - No additional code needed in AppDelegate
+ *    - Handled automatically by React Native Firebase
+ * 
+ * 4. Deep Linking
+ *    - Ensure your Info.plist includes URL schemes for your app
+ *    - Handle redirects properly in the openURL method
+ * 
+ * 5. Testing
+ *    - Run: xcodebuild -scheme YourApp -configuration Debug
+ *    - Or use: npm run ios (for React Native CLI)
+ */

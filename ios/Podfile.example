@@ -1,0 +1,111 @@
+# Podfile Configuration for ja-auth-sdk with iOS
+
+platform :ios, '12.0'
+
+target 'YourAppName' do
+  # React Native and dependencies
+  pod 'React', :path => '../node_modules/react-native/'
+  pod 'React-Core', :path => '../node_modules/react-native/React'
+  pod 'React-RCTActionSheetIOS', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
+  pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
+  pod 'React-RCTBlob', :path => '../node_modules/react-native/Libraries/Blob'
+  pod 'React-RCTImage', :path => '../node_modules/react-native/Libraries/Image'
+  pod 'React-RCTLinking', :path => '../node_modules/react-native/Libraries/LinkingIOS'
+  pod 'React-RCTNetwork', :path => '../node_modules/react-native/Libraries/Network'
+  pod 'React-RCTSettings', :path => '../node_modules/react-native/Libraries/Settings'
+  pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
+  pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
+  pod 'React-RCTWebSocket', :path => '../node_modules/react-native/Libraries/WebSocket'
+  pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
+  pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
+  pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
+  pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
+  pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
+  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  # Firebase Authentication and Core
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'FirebaseCore'
+
+  # Google Sign-In for iOS
+  pod 'GoogleSignIn', '~> 7.0'
+  pod 'google-cast-sdk/GoogleCast', '~> 21.0'
+
+  # Apple Authentication
+  # Note: This is built-in to iOS 13+ and handled by react-native-apple-authentication
+  # No explicit pod needed
+
+  # React Native Firebase modules
+  pod 'react-native-firebase/app'
+  pod 'react-native-firebase/auth'
+
+  # React Native Google Sign-In
+  pod 'react-native-google-signin', :path => '../node_modules/@react-native-google-signin/google-signin'
+
+  # React Native Apple Authentication
+  pod 'RNAppleAuthentication', :path => '../node_modules/@invertase/react-native-apple-authentication'
+
+  # Additional helpful pods
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
+  target 'YourAppNameTests' do
+    inherit! :search_paths
+  end
+
+  # Post-install script to fix build issues
+  post_install do |installer|
+    react_native_post_install(installer)
+    
+    # Fix for build issues with newer Xcode versions
+    installer.pods_project.targets.each do |target|
+      flutter_additional_ios_build_settings(target)
+      target.build_configurations.each do |config|
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+          '$(inherited)',
+          'FB_SONARKIT_ENABLED=1'
+        ]
+      end
+    end
+  end
+end
+
+# MARK: - Configuration Notes
+
+=begin
+IMPORTANT SETUP INSTRUCTIONS:
+
+1. Replace 'YourAppName' with your actual app name throughout this file
+
+2. After adding this Podfile, run:
+   pod install
+
+3. Always open the .xcworkspace file (NOT .xcodeproj) in Xcode:
+   open ios/YourAppName.xcworkspace
+
+4. Ensure your iOS Deployment Target matches (currently set to 12.0)
+   - Select your project in Xcode
+   - Select your target
+   - Go to Build Settings
+   - Search for "iOS Deployment Target"
+   - Set to 12.0 or higher
+
+5. For Google Sign-In configuration:
+   - GoogleService-Info.plist must be added to Xcode
+   - Add URL schemes in Info.plist
+   - Add GIDClientID to Info.plist
+
+6. For Apple Sign-In:
+   - Add capability in Xcode: Signing & Capabilities → + Capability → Sign in with Apple
+   - No pod installation needed (built-in to iOS)
+
+7. Build commands:
+   - Development: pod install && npx react-native run-ios
+   - Or: npm run ios
+   - Or manually in Xcode: Product → Run (or Cmd+R)
+
+=end

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Required for Google Sign-In -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- Replace YOUR_GOOGLE_CLIENT_ID with your actual Google Client ID -->
+				<string>com.googleusercontent.apps.YOUR_GOOGLE_CLIENT_ID</string>
+				<!-- Replace YOUR_BUNDLE_ID with your actual app Bundle ID -->
+				<string>YOUR_BUNDLE_ID</string>
+			</array>
+		</dict>
+	</array>
+
+	<!-- Google Sign-In Configuration -->
+	<key>GIDClientID</key>
+	<!-- Replace YOUR_GOOGLE_CLIENT_ID with your actual Google Client ID from Google Cloud Console -->
+	<string>YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com</string>
+
+	<!-- Apple Sign-In Configuration -->
+	<!-- Note: Sign in with Apple is configured via Xcode capabilities, not Info.plist -->
+	<!-- To enable: Select Target → Signing & Capabilities → + Capability → Sign in with Apple -->
+
+	<!-- Firebase Configuration (optional - usually handled by GoogleService-Info.plist) -->
+	<key>FirebaseAppName</key>
+	<string>Default</string>
+
+	<!-- Application Transport Security -->
+	<!-- Allow HTTP for development only (remove in production) -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<!-- Firebase domains -->
+			<key>googleapis.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<false/>
+			</dict>
+			<!-- Google Sign-In domains -->
+			<key>google.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<false/>
+			</dict>
+		</dict>
+	</key>
+
+	<!-- Required permissions for authentication -->
+	<key>NSContactsUsageDescription</key>
+	<string>We need access to your contacts to help you find friends.</string>
+
+	<key>NSCameraUsageDescription</key>
+	<string>We need camera access for profile photo capture.</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to set your profile picture.</string>
+
+	<!-- Standard app configuration -->
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+</dict>
+</plist>
