@@ -542,5 +542,3 @@ npm run build
 - Firebase team for the amazing authentication service
 - React Native Firebase for the native SDK wrapper
 - All contributors to this project
-
-Made with ❤️ for the React Native community
