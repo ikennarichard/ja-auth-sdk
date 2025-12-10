@@ -1,4 +1,4 @@
-# React Native Firebase Auth SDK
+# Ja Auth SDK
 
 A Firebase Authentication SDK for React Native with **pre-built UI** and **headless mode** support. Built with TypeScript.
 
